@@ -10,22 +10,18 @@
 #false {
 	color: red;
 }
-
 #true {
 	color: red;
 }
-
 .side {
 	font-size: 12px;
 	color: #5D5D5D;
 }
-
 .main {
 	font-size: 13px;
 	color: #5D5D5D;
 	font-weight: bold;
 }
-
 .ast {
 	font-size: 13px;
 	color: #E33333;
@@ -38,6 +34,11 @@
 	crossorigin="anonymous"></script>
 <script>
 	function validateForm(form) { // 폼 내용 검증
+		
+		const sel = document.querySelector("#sel")
+		const askOpt = document.querySelector("#optVal")
+		const optVal = sel.options[sel.selectedIndex].value 
+		
 		if (form.pass.value == "") {
 			alert("비번을 입력하세요.");
 			form.pass.focus();
@@ -53,8 +54,17 @@
 			form.email.focus();
 			return false;
 		}
+		if(sel.selectedIndex === 0){
+			alert("질문을 선택하세요")
+			return false
+		}
+		if(form.answer.value.length === 0){
+			alert("답변을 입력하세요")
+			return false
+		}
+		
 	};
-
+	
 	function getAJAX() {
 		const id = $('#id').val();
 		alert(id);
@@ -72,12 +82,10 @@
 					alert(response);
 					$('#true').hide();
 					$('#false').show();
-
 				} else {
 					alert(response);
 					$('#true').show();
 					$('#false').hide();
-
 				}
 				;
 			},
@@ -85,21 +93,18 @@
 				console.log(request, status, error);
 			},
 		});
-
 	}
-
 	$(function() {
 		//$('#true').hide();
 		//$('#false').hide();
-
 	});
 </script>
 </head>
 <body>
-	<jsp:include page="../common/Category.jsp" />
-	<jsp:include page="../common/Link.jsp" />
-
-	<form name="writeFrm" method="post" action="JoinProcess.jsp"
+<%-- 	<jsp:include page="../common/Category.jsp" /> --%>
+<%-- 	<jsp:include page="../common/Link.jsp" /> --%>
+<jsp:include page="Index.jsp"/>
+	<form name="writeFrm" method="post" action="#"
 		onsubmit="return validateForm(this);">
 		<table width="50%" align="center">
 
@@ -223,6 +228,24 @@
 				<td colspan="3"><hr></td>
 			</tr>
 			<tr>
+				<td align="center"><p class="main">* 질문</p></td>
+				<td colspan="3">
+					<select id="sel">
+						<option>질문선택</option>
+						<option>보물1호</option>
+						<option>초등학교</option>
+						<option>지역</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><p class="main">* 답변</p></td>
+				<td colspan="3"><input type="text" name="tel""></td>
+			</tr>
+			<tr>
+				<td colspan="3"><hr></td>
+			</tr>
+			<tr>
 				<td align="center"><p class="main">전화번호</p></td>
 				<td colspan="3"><input type="text" name="tel""></td>
 			</tr>
@@ -253,14 +276,12 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-
 					<button type="submit">가입하기</button>
-					<button type="button" onclick="location.href='List.jsp';">
+					<button type="button" >
 						목록 보기</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 </body>
-
 </html>
