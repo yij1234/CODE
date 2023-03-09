@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index+</title>
+
+
+<style>
+
+.button {
+	width: 150px;
+	height: 150px;
+	font-size: 25px;
+	border: 0;
+	border-radius: 50px;
+	outline: none;
+	align-content: center;
+	background-color: #E9E9E9;
+
+	}
+.button:hover {
+	width: 150px;
+	height: 150px;
+	font-size: 25px;
+	border: 0;
+	border-radius: 50px;
+	outline: none;
+	align-content: center;
+	background-color: #E33333;
+	font: bold;
+
+
+}
+</style>
+</head>
+
+<body>
+<div align="center">
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">영화</a></button>
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">감독</a></button>
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">배우</a></button>
+<br />
+<br />
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">국가</a></button>
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">등급</a></button>
+<button type="submit" class="button"><a href = "#" style = "text-decoration : none;">개봉날짜</a></button>
+</div>
+</body>
+</html>
