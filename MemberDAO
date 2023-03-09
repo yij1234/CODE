@@ -1,0 +1,102 @@
+package member;
+
+import common.JDBConnect;
+
+public class MemberDAO extends JDBConnect {
+	public MemberDAO() {
+		super();
+	}
+    // 명시한 데이터베이스로의 연결이 완료된 MemberDAO 객체를 생성합니다.
+    public MemberDAO(String driver, String url, String id, String pwd) {
+    	super(driver, url, d, pwd);
+    }
+
+    // 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
+    public MemberDTO getMemberDTO(String uid, String upass) {
+        MemberDTO dto = new MemberDTO();  // 회원 정보 DTO 객체 생성
+        String query = "SELECT * FROM member WHERE user_id=? AND user_pass=?";  // 쿼리문 템플릿
+
+        try {
+            // 쿼리 실행
+            psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+            psmt.setString(1, uid);    // 쿼리문의 첫 번째 인파라미터에 값 설정
+            psmt.setString(2, upass);  // 쿼리문의 두 번째 인파라미터에 값 설정
+            rs = psmt.executeQuery();  // 쿼리문 실행
+
+            // 결과 처리
+            if (rs.next()) {
+            	String id = rs.getString("user_id");
+            	String pass = rs.getString("user_pass");
+            	String name = rs.getString("name");
+            	String nick = rs.getString("nick");
+            	String birth = rs.getString("birth");
+            	String tel = "";
+            	String email = "";
+            	String user_class = "";
+            	String ask = "";
+            	String answer = "";
+            	String regidate = rs.getString("regidate");
+            	String fav_movie = "";
+            	dto = new MemberDTO();
+            	
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dto;  // DTO 객체 반환
+    }
+
+
+
+	public int insertWrite(MemberDTO dto) {
+		int totalCount = 0;	
+		String sql = "insert into member(user_id, user_pass, name, nick, birth, tel, email, user_class, ask, answer, fav_movie) ";
+		sql+= "	values (?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getUser_id());
+			psmt.setString(2, dto.getUser_pass());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getNick());
+			psmt.setString(5, dto.getBirth());
+			psmt.setString(6, dto.getTel());
+			psmt.setString(7, dto.getEmail());
+			psmt.setString(8, dto.getUser_class());
+			psmt.setString(9, dto.getAsk());
+			psmt.setString(10, dto.getAnswer());
+			psmt.setString(11, dto.getFav_movie());
+			totalCount = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return totalCount;		
+	}
+
+
+	public MemberDTO selectView(String id) { // 게시물 1개
+		MemberDTO dto  = new MemberDTO();	
+		String sql = "SELECT * FROM MEMBER m WHERE user_id = ?";
+			   
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				dto.setUser_id(rs.getString("id"));
+				dto.setUser_pass(rs.getString("pass"));
+				dto.setName(rs.getString("name"));
+				dto.setRegidate(rs.getString("regidate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;		
+	}	
+
+
+}
