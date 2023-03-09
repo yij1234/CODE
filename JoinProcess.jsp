@@ -47,17 +47,3 @@ if (iResult == 1) {
 }
 
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>가입을 환영합니다.</title>
-
-<!-- (ID)님 회원가입 축하합니다 다시 로그인해주세요 페이지 추가 -->
-
-</head>
-<body>
-</body>
-</html>
-
